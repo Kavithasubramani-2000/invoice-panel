@@ -31,6 +31,7 @@ const SignupPage = () => {
         name: data.name.trim(),
         email: data.email.trim().toLowerCase(),
         password: data.password,
+        confirmPassword: data.confirmPassword || data.password,
       });
       setUser(res.data.user);
       navigate('/invoices');

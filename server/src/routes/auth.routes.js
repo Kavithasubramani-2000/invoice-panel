@@ -10,8 +10,8 @@ router.post('/signup', validate([
   body('name').trim().notEmpty().withMessage('Name is required').isLength({ max: 100 }).withMessage('Name too long'),
   body('email').isEmail().withMessage('Valid email required').normalizeEmail(),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-  body('confirmPassword').custom((val, { req }) => {
-    if (val !== req.body.password) throw new Error('Passwords do not match');
+  body('confirmPassword').optional().custom((val, { req }) => {
+    if (val && val !== req.body.password) throw new Error('Passwords do not match');
     return true;
   }),
 ]), signup);
