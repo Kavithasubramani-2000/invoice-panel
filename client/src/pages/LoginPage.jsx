@@ -34,6 +34,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const res = await login({ email: email.trim().toLowerCase(), password });
+      if (res.data?.token) localStorage.setItem('token', res.data.token);
       setUser(res.data.user);
       navigate('/invoices');
     } catch (err) {

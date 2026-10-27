@@ -33,6 +33,7 @@ const SignupPage = () => {
         password: data.password,
         confirmPassword: data.confirmPassword || data.password,
       });
+      if (res.data?.token) localStorage.setItem('token', res.data.token);
       setUser(res.data.user);
       navigate('/invoices');
     } catch (e) {

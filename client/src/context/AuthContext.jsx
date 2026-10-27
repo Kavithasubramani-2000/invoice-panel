@@ -20,13 +20,14 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     loadUser();
-    const handleLogout = () => setUser(null);
+    const handleLogout = () => { localStorage.removeItem('token'); setUser(null); };
     window.addEventListener('auth:logout', handleLogout);
     return () => window.removeEventListener('auth:logout', handleLogout);
   }, [loadUser]);
 
   const logout = async () => {
     try { await apiLogout(); } catch {}
+    localStorage.removeItem('token');
     setUser(null);
   };
 

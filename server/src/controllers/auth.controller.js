@@ -4,8 +4,8 @@ const User = require('../models/User');
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+  secure: true,
+  sameSite: 'none',
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
 
@@ -30,7 +30,7 @@ const signup = async (req, res, next) => {
     const token = signToken(user._id);
     res.cookie('token', token, COOKIE_OPTIONS);
 
-    return res.status(201).json({ success: true, user: user.toSafeObject() });
+    return res.status(201).json({ success: true, token, user: user.toSafeObject() });
   } catch (err) {
     next(err);
   }
@@ -54,7 +54,7 @@ const login = async (req, res, next) => {
     const token = signToken(user._id);
     res.cookie('token', token, COOKIE_OPTIONS);
 
-    return res.json({ success: true, user: user.toSafeObject() });
+    return res.json({ success: true, token, user: user.toSafeObject() });
   } catch (err) {
     next(err);
   }
