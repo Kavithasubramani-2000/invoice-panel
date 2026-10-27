@@ -1,0 +1,16 @@
+{
+  "name": "invoice-panel",
+  "version": "1.0.0",
+  "description": "Full-stack invoice management application",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "mongo": "npm run mongo:start --prefix server",
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "build": "npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
